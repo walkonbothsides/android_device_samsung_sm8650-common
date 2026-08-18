@@ -1,0 +1,31 @@
+//
+// SPDX-FileCopyrightText: 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "IfaaManagerServiceImpl",
+    srcs: [
+        "aidl/**/*.aidl",
+        "src/**/*.java",
+    ],
+    aidl: {
+        local_include_dirs: ["aidl"],
+    },
+    certificate: "platform",
+    platform_apis: true,
+    privileged: true,
+}
+
+java_test_host {
+    name: "IfaaCommandParserTest",
+    srcs: [
+        "src/org/ifaa/aidl/manager/IfaaCommandParser.java",
+        "src/org/ifaa/aidl/manager/IfaaFingerprintProtocol.java",
+        "tests/**/*.java",
+    ],
+    libs: ["junit-host"],
+    test_options: {
+        unit_test: true,
+    },
+}

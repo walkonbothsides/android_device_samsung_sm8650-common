@@ -813,6 +813,13 @@ vendor/lib64/libsfp_sensor.so
 vendor/lib64/libsfp_teegw.so
 vendor/lib64/vendor.samsung.hardware.biometrics.fingerprint-V1-ndk.so
 
+# IFAA
+vendor/bin/hw/vendor.samsung.hardware.ifaa-service
+vendor/etc/init/vendor.samsung.hardware.ifaa-service.rc
+vendor/etc/vintf/manifest/vendor.samsung.hardware.ifaa-service.xml
+vendor/lib64/libIfaaCa.so
+vendor/lib64/vendor.samsung.hardware.ifaa-V1-ndk.so
+
 # Gatekeeper - from S928BXXS4BYH2
 vendor/bin/hw/android.hardware.gatekeeper-service|feee846c425f4a5eeb1d4a1338edc926123bee96
 vendor/etc/init/android.hardware.gatekeeper-service.rc|ff8adc96d2332ef7f626ee8d7c21ef5931ffa362

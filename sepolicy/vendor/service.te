@@ -1,1 +1,3 @@
 type hal_samsung_spen_service, protected_service, service_manager_type;
+type hal_ifaa_service, protected_service, service_manager_type;
+type hal_seh_fingerprint_service, protected_service, service_manager_type;

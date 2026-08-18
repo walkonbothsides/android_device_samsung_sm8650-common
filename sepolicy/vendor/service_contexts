@@ -29,3 +29,9 @@ vendor.samsung.hardware.radio.sim.ISehRadioSim/slot2                u:object_r:h
 
 # S pen
 vendor.samsung.hardware.spen.ISPen/default                          u:object_r:hal_samsung_spen_service:s0
+
+# IFAA
+vendor.samsung.hardware.ifaa.ISehIfaa/default                       u:object_r:hal_ifaa_service:s0
+
+# Fingerprint
+vendor.samsung.hardware.biometrics.fingerprint.ISehFingerprint/default u:object_r:hal_seh_fingerprint_service:s0

@@ -143,10 +143,12 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint-service.samsung
+    android.hardware.biometrics.fingerprint-service.samsung \
+    IfaaManagerServiceImpl
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
+    frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml \
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-org.ifaa.aidl.manager.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-org.ifaa.aidl.manager.xml
 
 
 # Graphics

@@ -1,2 +1,9 @@
 # S pen
 hal_client_domain(system_app, hal_samsung_spen)
+
+# IFAA
+hal_client_domain(system_app, hal_ifaa)
+
+# Samsung fingerprint extension used by IFAA
+allow system_app hal_seh_fingerprint_service:service_manager find;
+binder_call(system_app, hal_fingerprint_default)

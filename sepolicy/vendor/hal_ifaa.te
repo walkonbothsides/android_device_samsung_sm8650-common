@@ -1,0 +1,8 @@
+# Binder IPC between IFAA clients and the vendor HAL.
+binder_call(hal_ifaa_client, hal_ifaa_server)
+
+add_service(hal_ifaa_server, hal_ifaa_service)
+allow hal_ifaa_client hal_ifaa_service:service_manager find;
+
+# The HAL invokes a callback hosted by the system app.
+binder_call(hal_ifaa, system_app)
