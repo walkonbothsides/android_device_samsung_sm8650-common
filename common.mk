@@ -49,10 +49,17 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
+    libsamsungSoundbooster_plus \
     libsndcardparser \
     libtinycompress \
     libvolumelistener \
+    SamsungDAP \
+    SoundBoosterStage \
     sound_trigger.primary.pineapple
+
+TARGET_EXCLUDES_AUDIOFX := true
+
+$(call soong_config_set,samsungAudioVars,soundbooster_dsp_library,//vendor/samsung/sm8650-common:lib_SoundBooster_ver2000)
 
 AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
 
@@ -61,7 +68,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple/audio_effects.conf \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple/audio_effects.xml \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple_qssi/audio_policy_configuration.xml
 
