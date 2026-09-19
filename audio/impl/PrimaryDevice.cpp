@@ -212,18 +212,24 @@ Return<Result> PrimaryDevice::setVoiceVolume(float volume) {
 }
 
 Return<Result> PrimaryDevice::setMode(AudioMode mode) {
+    static constexpr const char* kPrimaryVoiceCallActive =
+            "vsid=297816064;call_state=2"; // 0x11c05000
+    static constexpr const char* kSecondaryVoiceCallActive =
+            "vsid=299651072;call_state=2"; // 0x11dc5000
+    static constexpr const char* kPrimaryVoiceCallInactive =
+            "vsid=297816064;call_state=1"; // 0x11c05000
+    static constexpr const char* kSecondaryVoiceCallInactive =
+            "vsid=299651072;call_state=1"; // 0x11dc5000
+
     /* On stock ROM Samsung sets the g_call_state and g_call_sim_slot audio parameters
      * in the framework, breaking it on AOSP ROMs. For the audio params call_state and
      * g_call_state 2 corresponds to CALL_ACTIVE and 1 to CALL_INACTIVE respectively.
      * For the g_call_sim_slot parameter 0x01 describes SIM1 and 0x02 SIM2.
      */
 
-    char simSlot1[92], simSlot2[92];
-
-    // These props return either 0 (not calling),
-    // or 1 (SIM is calling)
-    property_get("vendor.calls.slot_id0", simSlot1, "");
-    property_get("vendor.calls.slot_id1", simSlot2, "");
+    // Treat unset or invalid call-slot properties as inactive.
+    bool simSlot1 = property_get_bool("vendor.calls.slot_id0", false);
+    bool simSlot2 = property_get_bool("vendor.calls.slot_id1", false);
 
     // Wait until one sim slot reports a call
     if (mode == AudioMode::IN_CALL) {
@@ -231,22 +237,30 @@ Return<Result> PrimaryDevice::setMode(AudioMode mode) {
         static constexpr useconds_t kSamsungCallSlotWaitSleepUs = 10 * 1000;
 
         for (int attempt = 0;
-             attempt < kSamsungCallSlotWaitAttempts &&
-                     strcmp(simSlot1, "0") == 0 &&
-                     strcmp(simSlot2, "0") == 0;
+             attempt < kSamsungCallSlotWaitAttempts && !simSlot1 && !simSlot2;
              ++attempt) {
             usleep(kSamsungCallSlotWaitSleepUs);
-            property_get("vendor.calls.slot_id0", simSlot1, "");
-            property_get("vendor.calls.slot_id1", simSlot2, "");
+            simSlot1 = property_get_bool("vendor.calls.slot_id0", false);
+            simSlot2 = property_get_bool("vendor.calls.slot_id1", false);
         }
     }
 
-    if (strcmp(simSlot1, "1") == 0) {
+    if (simSlot1) {
         // SIM1
         mDevice->halSetParameters("g_call_sim_slot=0x01");
-    } else if (strcmp(simSlot2, "1") == 0) {
+        if (mode == AudioMode::IN_CALL) {
+            ALOGI("Setting primary voice call state active");
+            mDevice->halSetParameters("g_call_state=2");
+            mDevice->halSetParameters(kPrimaryVoiceCallActive);
+        }
+    } else if (simSlot2) {
         // SIM2
         mDevice->halSetParameters("g_call_sim_slot=0x02");
+        if (mode == AudioMode::IN_CALL) {
+            ALOGI("Setting secondary voice call state active");
+            mDevice->halSetParameters("g_call_state=2");
+            mDevice->halSetParameters(kSecondaryVoiceCallActive);
+        }
     } else if (mode == AudioMode::IN_CALL) {
         ALOGW("Timed out waiting for vendor.calls.slot_id* during IN_CALL; "
               "continuing without changing g_call_sim_slot");
@@ -267,9 +281,18 @@ Return<Result> PrimaryDevice::setMode(AudioMode mode) {
             return Result::INVALID_ARGUMENTS;
     };
 
-    return mDevice->analyzeStatus(
+    auto result = mDevice->analyzeStatus(
         "set_mode",
         mDevice->device()->set_mode(mDevice->device(), static_cast<audio_mode_t>(mode)));
+
+    if (result == Result::OK && mode == AudioMode::NORMAL) {
+        ALOGI("Setting voice call state inactive");
+        mDevice->halSetParameters("g_call_state=1");
+        mDevice->halSetParameters(kPrimaryVoiceCallInactive);
+        mDevice->halSetParameters(kSecondaryVoiceCallInactive);
+    }
+
+    return result;
 }
 
 Return<void> PrimaryDevice::getBtScoNrecEnabled(getBtScoNrecEnabled_cb _hidl_cb) {

@@ -21,6 +21,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Audio
+$(call soong_config_set_bool,qtiaudio,pal_voip_sample_rate_calibration,true)
+
 PRODUCT_PACKAGES += \
     android.hardware.audio@7.1-impl.samsung-sm8650 \
     android.hardware.audio.effect@7.0-impl \
@@ -28,34 +30,46 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \
     android.hardware.soundtrigger@2.3-impl \
     audio.bluetooth.default \
+    audio.primary.default \
+    audio.primary.pineapple \
     audio.r_submix.default \
     audio.usb.default \
+    audioadsprpcd \
     libagm_compress_plugin \
     libagm_mixer_plugin \
     libagm_pcm_plugin \
+    libagmclient \
+    libaudiochargerlistener \
     libbatterylistener \
     libcustomva_intf \
     libfmpal \
     libhfp_pal \
     libhotword_intf \
+    libpalclient \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
+    libsamsungSoundbooster_plus \
+    libsndcardparser \
+    libtinycompress \
     libvolumelistener \
+    SamsungDAP \
+    SoundBoosterStage \
     sound_trigger.primary.pineapple
 
+TARGET_EXCLUDES_AUDIOFX := true
+
+$(call soong_config_set,samsungAudioVars,soundbooster_dsp_library,//vendor/samsung/sm8650-common:lib_SoundBooster_ver2000)
+
 AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
-CONFIG_HAL_SRC_DIR := $(AUDIO_HAL_DIR)/configs/pineapple
-CONFIG_PAL_SRC_DIR := $(AUDIO_HAL_DIR)/../pal/configs/pineapple
 
 PRODUCT_COPY_FILES += \
-    $(CONFIG_HAL_SRC_DIR)/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple/audio_effects.conf \
-    $(CONFIG_HAL_SRC_DIR)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple/audio_effects.xml \
-    $(CONFIG_PAL_SRC_DIR)/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml \
-    $(CONFIG_HAL_SRC_DIR)/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml
+    $(LOCAL_PATH)/audio/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml \
+    $(LOCAL_PATH)/audio/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple/audio_policy_configuration.xml
+    $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple/audio_effects.xml \
+    $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple_qssi/audio_policy_configuration.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
@@ -102,22 +116,18 @@ PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
 
 # Display
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.mapper@4.0-impl-qti-display \
     android.hardware.graphics.composer3-V2-ndk.vendor \
+    android.hardware.graphics.mapper@4.0-impl-qti-display \
     init.qti.display_boot.rc \
     init.qti.display_boot.sh \
     libgpu_tonemapper \
     vendor.qti.hardware.display.allocator-service \
     vendor.qti.hardware.display.composer3-V1-ndk.vendor \
     vendor.qti.hardware.display.composer-service \
-    vendor.qti.hardware.display.composer-service.rc \
-    vendor.qti.hardware.display.composer-service.xml \
     vendor.qti.hardware.display.config-V2-ndk.vendor \
     vendor.qti.hardware.display.config-V8-ndk.vendor \
     vendor.qti.hardware.display.demura-service \
     vendor.qti.hardware.display.demura-V1-ndk.vendor
-
-$(call soong_config_set_bool,qtidisplay,legacy_pphwresourceinfo,true)
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
