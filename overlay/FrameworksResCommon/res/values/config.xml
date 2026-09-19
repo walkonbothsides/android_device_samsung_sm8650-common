@@ -301,4 +301,9 @@
         <item>eutran,11</item>
         <item>nfc,1</item>
     </string-array>
+    <!-- Enable the upstream automatic-brightness-in-doze path for AOD.
+         AOSP default is false. Requires a doze brightness mapping in displayconfig.xml,
+         otherwise DisplayBrightnessStrategySelector keeps using DozeBrightnessStrategy
+         and AutomaticBrightnessController.switchMode(DOZE) silently returns. -->
+    <bool name="config_allowAutoBrightnessWhileDozing">true</bool>
 </resources>
