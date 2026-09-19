@@ -103,6 +103,7 @@ PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
+    android.hardware.graphics.composer3-V2-ndk.vendor \
     init.qti.display_boot.rc \
     init.qti.display_boot.sh \
     libgpu_tonemapper \
@@ -112,6 +113,7 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.composer-service.rc \
     vendor.qti.hardware.display.composer-service.xml \
     vendor.qti.hardware.display.config-V2-ndk.vendor \
+    vendor.qti.hardware.display.config-V8-ndk.vendor \
     vendor.qti.hardware.display.demura-service \
     vendor.qti.hardware.display.demura-V1-ndk.vendor
 
