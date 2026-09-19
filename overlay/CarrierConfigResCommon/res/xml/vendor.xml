@@ -1448,7 +1448,6 @@
     <carrier_config mcc="460" mnc="00">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
@@ -1503,8 +1502,9 @@
             <item value="0201008616" />
         </string-array>
         <boolean name="carrier_support_send_media_configs_to_radio_layer_bool" value="true" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
         <boolean name="vonr_enabled_bool" value="true" />
@@ -1517,7 +1517,6 @@
         <boolean name="notify_video_call_failed" value="true" />
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="config_spn_override_enabled" value="true" />
         <boolean name="allow_emergency_numbers_in_call_log_bool" value="true" />
         <boolean name="show_4g_for_lte_data_icon_bool" value="true" />
@@ -1546,8 +1545,9 @@
         <boolean name="allow_hold_video_call_bool" value="false" />
         <boolean name="carrier_allow_transfer_ims_call_bool" value="false" />
         <boolean name="carrier_video_crs_supported_bool" value="true" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
         <boolean name="vonr_enabled_bool" value="true" />
@@ -1555,7 +1555,6 @@
     <carrier_config mcc="460" mnc="02">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
@@ -1610,8 +1609,9 @@
             <item value="0201008616" />
         </string-array>
         <boolean name="carrier_support_send_media_configs_to_radio_layer_bool" value="true" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
         <boolean name="vonr_enabled_bool" value="true" />
@@ -1623,7 +1623,6 @@
     <carrier_config mcc="460" mnc="03">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
         <boolean name="ascii_7_bit_support_for_long_message" value="true" />
@@ -1659,8 +1658,9 @@
         <boolean name="carrier_allow_transfer_ims_call_bool" value="false" />
         <boolean name="disable_filter_out_conference_host" value="true" />
         <boolean name="support_video_conference_call_bool" value="false" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="carrier_video_crs_supported_bool" value="true" />
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
@@ -1676,7 +1676,6 @@
     <carrier_config mcc="460" mnc="04">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
@@ -1731,8 +1730,9 @@
             <item value="0201008616" />
         </string-array>
         <boolean name="carrier_support_send_media_configs_to_radio_layer_bool" value="true" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
         <boolean name="vonr_enabled_bool" value="true" />
@@ -1744,7 +1744,6 @@
     <carrier_config mcc="460" mnc="05">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="allow_emergency_numbers_in_call_log_bool" value="true" />
         <map name="apn_default_values_strings_array">
             <string name="protocol">IPV4V6</string>
@@ -1775,7 +1774,6 @@
         <boolean name="notify_video_call_failed" value="true" />
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="config_spn_override_enabled" value="true" />
         <boolean name="allow_emergency_numbers_in_call_log_bool" value="true" />
         <boolean name="show_4g_for_lte_data_icon_bool" value="true" />
@@ -1806,7 +1804,6 @@
     <carrier_config mcc="460" mnc="07">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
@@ -1860,8 +1857,9 @@
             <item value="0201008616" />
         </string-array>
         <boolean name="carrier_support_send_media_configs_to_radio_layer_bool" value="true" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
         <boolean name="vonr_enabled_bool" value="true" />
@@ -1873,7 +1871,6 @@
     <carrier_config mcc="460" mnc="08">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
@@ -1926,8 +1923,9 @@
             <item value="0201008616" />
         </string-array>
         <boolean name="carrier_support_send_media_configs_to_radio_layer_bool" value="true" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
         <boolean name="vonr_enabled_bool" value="true" />
@@ -1940,7 +1938,6 @@
         <boolean name="notify_video_call_failed" value="true" />
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="allow_emergency_numbers_in_call_log_bool" value="true" />
         <boolean name="show_4g_for_lte_data_icon_bool" value="true" />
         <map name="apn_default_values_strings_array">
@@ -1964,8 +1961,9 @@
         <boolean name="allow_hold_video_call_bool" value="false" />
         <boolean name="carrier_allow_transfer_ims_call_bool" value="false" />
         <boolean name="carrier_video_crs_supported_bool" value="true" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
         <boolean name="vonr_enabled_bool" value="true" />
@@ -1982,7 +1980,6 @@
     <carrier_config mcc="460" mnc="11">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
         <boolean name="ascii_7_bit_support_for_long_message" value="true" />
@@ -2018,8 +2015,9 @@
         <boolean name="carrier_allow_transfer_ims_call_bool" value="false" />
         <boolean name="disable_filter_out_conference_host" value="true" />
         <boolean name="support_video_conference_call_bool" value="false" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="carrier_video_crs_supported_bool" value="true" />
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
@@ -2035,7 +2033,6 @@
     <carrier_config mcc="460" mnc="12">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
         <boolean name="ascii_7_bit_support_for_long_message" value="true" />
@@ -2076,7 +2073,6 @@
     <carrier_config mcc="460" mnc="13">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
@@ -2131,8 +2127,9 @@
             <item value="0201008616" />
         </string-array>
         <boolean name="carrier_support_send_media_configs_to_radio_layer_bool" value="true" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
         <boolean name="vonr_enabled_bool" value="true" />
@@ -2144,7 +2141,6 @@
     <carrier_config mcc="460" mnc="15">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
         <boolean name="check_mobile_data_for_cf" value="true" />
         <boolean name="disable_supplementary_services_in_airplane_mode_bool" value="true" />
@@ -2196,8 +2192,9 @@
         <boolean name="carrier_allow_transfer_ims_call_bool" value="false" />
         <boolean name="carrier_video_crs_supported_bool" value="true" />
         <boolean name="carrier_support_send_media_configs_to_radio_layer_bool" value="true" />
-        <int-array name="carrier_nr_availabilities_int_array" num="1">
-            <item value="1" />
+        <int-array name="carrier_nr_availabilities_int_array" num="2">
+            <item value="1" /> <!-- NSA -->
+            <item value="2" /> <!-- SA -->
         </int-array>
         <boolean name="allow_hold_call_during_emergency_bool" value="false" />
         <boolean name="vonr_enabled_bool" value="true" />
