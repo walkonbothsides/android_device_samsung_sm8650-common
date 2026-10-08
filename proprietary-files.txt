@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from Samsung Galaxy S24 Ultra (S928BXXS6DZF2), some from S9280ZCS6DZF2
+## are from Samsung Galaxy S24 Ultra (S928BXXS6DZF2)
 #
 # Current blobs with deps disabled:
 # vendor.qti.hardware.display.composer-service depends on multiple versions of the same aidl_interface: android.hardware.graphics.composer3-V2-ndk-source, android.hardware.graphics.composer3-V3-ndk-source
@@ -1280,3 +1280,10 @@ vendor/etc/init/wifi_qcom.rc
 vendor/etc/wifi/kiwi_v2/WCNSS_qcom_cfg.ini
 vendor/etc/wifi/p2p_supplicant_overlay.conf
 vendor/etc/wifi/wpa_supplicant_overlay.conf
+
+# --- walkonbothsides local notes (kept out of upstream-edited header) ---
+# A subset of blobs is sourced from S9280ZCS6DZF2 (China-carrier firmware)
+# in addition to the stock S928BXXS6DZF2 listed above. See commit history
+# (commits referencing S9280ZCS6DZF2) for the exact blobs that differ.
+# This block lives at the end of the file on purpose so that Exynoobs
+# pull-bot sync merges do not produce header-comment conflicts.
