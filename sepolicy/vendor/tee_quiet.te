@@ -1,0 +1,4 @@
+# qseecomd probes GPT/XBL block devices (audit noise, no functional need on
+# this device; QC reference grants these to hal_bootctl only) — silence.
+dontaudit tee vendor_gpt_block_device:blk_file { getattr read open };
+dontaudit tee vendor_xbl_block_device:blk_file { getattr read open };

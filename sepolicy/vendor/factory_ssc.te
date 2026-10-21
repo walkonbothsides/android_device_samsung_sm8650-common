@@ -9,6 +9,10 @@ allow factory_ssc property_socket:sock_file { append getattr ioctl read write };
 
 get_prop(factory_ssc, hwservicemanager_prop)
 
+# Read panel identity and brightness range when loading light sensor calibration.
+allow factory_ssc { vendor_sysfs_display vendor_sysfs_graphics }:dir search;
+allow factory_ssc { vendor_sysfs_display vendor_sysfs_graphics }:file r_file_perms;
+
 # Allow factory_ssc to read/write app_efs_file
 allow factory_ssc app_efs_file:dir create_dir_perms;
 allow factory_ssc app_efs_file:file create_file_perms;
