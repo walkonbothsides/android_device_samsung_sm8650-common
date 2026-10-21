@@ -1,0 +1,2 @@
+# The Samsung composer reads persist.sys.sf.hs_mode when updating color modes.
+get_prop(hal_graphics_composer_default, surfaceflinger_color_prop)

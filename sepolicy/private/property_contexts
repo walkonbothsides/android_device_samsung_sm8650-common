@@ -8,6 +8,9 @@ ro.omc.region                                    u:object_r:exported_config_prop
 ro.csc.                                          u:object_r:exported_config_prop:s0
 mdc.                                             u:object_r:exported_config_prop:s0
 
+# Display color configuration consumed by the Samsung composer.
+persist.sys.sf.hs_mode                           u:object_r:surfaceflinger_color_prop:s0 exact int
+
 # Hermesd
 security.securehw.                               u:object_r:vendor_securehw_prop:s0
 security.securenvm.available                     u:object_r:vendor_securenvm_prop:s0
