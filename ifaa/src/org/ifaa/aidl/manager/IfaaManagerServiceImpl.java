@@ -109,7 +109,9 @@ public final class IfaaManagerServiceImpl extends Service {
             try {
                 synchronized (mHalLock) {
                     if (command == 0x02 || command == 0x04) {
-                        syncFingerprintIds();
+                        if (!syncFingerprintIds()) {
+                            return null;
+                        }
                     }
                     return invokeHal(data);
                 }
@@ -234,18 +236,20 @@ public final class IfaaManagerServiceImpl extends Service {
         }
     }
 
-    private void syncFingerprintIds() {
+    private boolean syncFingerprintIds() {
         byte[] response = invokeFingerprintHal(IfaaFingerprintProtocol.createFidoRequest());
         byte[] ids = IfaaFingerprintProtocol.parseFidoResponse(response);
         if (ids == null) {
             Log.e(TAG, "Unable to read Samsung fingerprint IDs");
-            return;
+            return false;
         }
         byte[] result = invokeHal(IfaaFingerprintProtocol.createSetIdListCommand(ids));
         if (result == null || result.length < 4
                 || (result[0] | result[1] | result[2] | result[3]) != 0) {
             Log.e(TAG, "Unable to update IFAA fingerprint IDs");
+            return false;
         }
+        return true;
     }
 
     private byte[] invokeFingerprintHal(byte[] input) {
