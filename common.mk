@@ -285,6 +285,7 @@ PRODUCT_COPY_FILES += \
 
 # Namespaces
 PRODUCT_SOONG_NAMESPACES += \
+    hardware/google/pixel/power-libperfmgr \
     $(LOCAL_PATH) \
     hardware/google/interfaces \
     hardware/google/pixel \
@@ -323,6 +324,7 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service.lineage-libperfmgr \
+    libperfmgr \
     libqti-perfd-client
 
 # PowerShare
