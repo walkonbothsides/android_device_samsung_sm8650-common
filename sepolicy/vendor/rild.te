@@ -46,3 +46,6 @@ set_prop(rild, vendor_data_shsusr_prop)
 get_prop(rild, vendor_radio_prop)
 
 dontaudit rild { default_prop system_prop }:file { read open getattr map };
+
+# Samsung RIL authenticates the DRK HAL by reading /proc/<pid>/cmdline.
+r_dir_file(rild, hal_drk_default)

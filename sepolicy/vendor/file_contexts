@@ -121,3 +121,15 @@
 /(vendor|system/vendor)/bin/hw/samsung\.software\.media\.c2@1\.0-service                                     u:object_r:mediacodec_exec:s0
 /(vendor|system/vendor)/bin/secril_config_svc                                                                u:object_r:vendor_secril_config_svc_exec:s0
 /(vendor|system/vendor)/bin/hw/macloader                                                                     u:object_r:macloader_exec:s0
+
+# 三星 UFS LUN 布局的 bsg 节点（0:0:0:0..3 等）；QC 参考机的精确条目
+# (/dev/0:0:0:49476, /dev/0:0:0:4) 在 device/qcom/sepolicy_vndr 的 file_contexts。
+# 不匹配会落到通用 device 标签，tee(qseecomd) 的 RPMB/安全存储访问被拒。
+/dev/0:0:0:[0-9]+          u:object_r:vendor_bsg_device:s0
+/dev/bsg/0:0:0:[0-9]+      u:object_r:vendor_bsg_device:s0
+
+/vendor/bin/hw/vendor\.samsung\.hardware\.soter-service u:object_r:hal_soter_default_exec:s0
+
+/vendor/bin/hw/vendor\.samsung\.hardware\.security\.drk-service u:object_r:hal_drk_default_exec:s0
+
+/data/vendor/log/drk(/.*)? u:object_r:vendor_drk_data_file:s0

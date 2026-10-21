@@ -1,0 +1,4 @@
+binder_call(hal_drk_client, hal_drk_server)
+binder_call(hal_drk_server, hal_drk_client)
+add_service(hal_drk_server, hal_drk_service)
+allow hal_drk_client hal_drk_service:service_manager find;

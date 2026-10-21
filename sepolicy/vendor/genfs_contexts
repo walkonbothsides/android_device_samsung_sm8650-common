@@ -105,3 +105,6 @@ genfscon sysfs "/devices/virtual/vib_info_class/vib_support_info/functions"   u:
 
 # Wi-Fi
 genfscon sysfs "/wifi" u:object_r:sysfs_wifi:s0
+
+# DRK device identity
+genfscon sysfs /devices/virtual/sec/ufs/un u:object_r:vendor_sysfs_ufs_un:s0

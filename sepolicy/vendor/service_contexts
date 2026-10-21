@@ -35,3 +35,9 @@ vendor.samsung.hardware.ifaa.ISehIfaa/default                       u:object_r:h
 
 # Fingerprint
 vendor.samsung.hardware.biometrics.fingerprint.ISehFingerprint/default u:object_r:hal_seh_fingerprint_service:s0
+
+# Soter
+vendor.samsung.hardware.soter.ISehSoter/default u:object_r:hal_soter_service:s0
+
+# DRK used by SSKDS
+vendor.samsung.hardware.security.drk.ISehDrk/default u:object_r:hal_drk_service:s0

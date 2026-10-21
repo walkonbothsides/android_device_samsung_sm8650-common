@@ -60,3 +60,7 @@ type vendor_sysfs_vib_writable, fs_type, sysfs_type;
 # Wi-Fi
 type sysfs_wifi, fs_type, sysfs_type;
 type wifi_efs_file, file_type;
+
+# Soter DRK provisioning
+type vendor_sysfs_ufs_un, fs_type, sysfs_type;
+type vendor_drk_data_file, file_type, data_file_type;

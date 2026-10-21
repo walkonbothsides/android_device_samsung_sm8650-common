@@ -1,0 +1,20 @@
+type hal_drk_default, domain;
+hal_server_domain(hal_drk_default, hal_drk)
+type hal_drk_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_drk_default)
+
+binder_call(hal_drk_default, servicemanager)
+allow hal_drk_default tee_device:chr_file rw_file_perms;
+allow hal_drk_default vendor_dmabuf_qseecom_heap_device:chr_file r_file_perms;
+allow hal_drk_default vendor_dmabuf_qseecom_ta_heap_device:chr_file r_file_perms;
+allow hal_drk_default { efs_file sec_efs_file dak_efs_file }:dir r_dir_perms;
+allow hal_drk_default { efs_file sec_efs_file dak_efs_file }:file r_file_perms;
+
+# Read the device identity and communicate with Samsung RIL for DRK validation.
+allow hal_drk_default mnt_vendor_file:dir search;
+allow hal_drk_default vendor_sysfs_ufs_un:file r_file_perms;
+allow hal_drk_default rild:unix_stream_socket connectto;
+
+allow hal_drk_default vendor_data_file:dir search;
+allow hal_drk_default vendor_drk_data_file:dir create_dir_perms;
+allow hal_drk_default vendor_drk_data_file:file create_file_perms;

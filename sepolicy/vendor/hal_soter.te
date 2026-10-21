@@ -1,0 +1,5 @@
+binder_call(hal_soter_client, hal_soter_server)
+binder_call(hal_soter_server, hal_soter_client)
+
+add_service(hal_soter_server, hal_soter_service)
+allow hal_soter_client hal_soter_service:service_manager find;

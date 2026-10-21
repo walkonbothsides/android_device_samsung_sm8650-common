@@ -1,2 +1,6 @@
 hal_attribute_lineage(samsung_spen)
 hal_attribute_lineage(ifaa)
+
+hal_attribute_lineage(soter)
+
+hal_attribute_lineage(drk)
