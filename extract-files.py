@@ -28,6 +28,10 @@ namespace_imports = [
     'vendor/qcom/opensource/dataservices',
 ]
 
+def lib_fixup_soter_system_suffix(lib: str, partition: str, *args, **kwargs):
+    return f'{lib}_soter_system' if partition == 'system' else None
+
+
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
     return f'{lib}_{partition}' if partition == 'vendor' else None
 
@@ -35,16 +39,37 @@ def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
+        'libdk_native_keymint',
+        'vendor.samsung.hardware.keymint-V3-ndk',
+        'vendor.samsung.hardware.security.drk-V1-ndk',
+        'vendor.samsung.hardware.security.drk@2.0',
+    ):
+        lib_fixup_soter_system_suffix,
+    (
         'vendor.qti.diaghal@1.0',
         'libsecril-client',
     ): lib_fixup_vendor_suffix,
 }
 
 blob_fixups: blob_fixups_user_type = {
+    'vendor/etc/seccomp_policy/atfwd@2.0.policy': blob_fixup()
+        .add_line_if_missing('lseek: 1'),
     'vendor/etc/init/android.hardware.security.keymint-service-qti.rc': blob_fixup()
         .regex_replace('android.hardware.security.keymint-service', 'android.hardware.security.keymint-service-qti'),
     ('vendor/bin/hw/android.hardware.security.keymint-service-spu-qti', 'vendor/lib64/libspukeymint.so'): blob_fixup()
         .replace_needed('android.hardware.security.sharedsecret-V2-ndk.so', 'android.hardware.security.sharedsecret-V1-ndk.so'),
+    'system/priv-app/SecSoterService/SecSoterService.apk': blob_fixup()
+        .apktool_patch('soter/patches/secsoter'),
+    'system/priv-app/SoterSskdsSerivce/SoterSskdsSerivce.apk': blob_fixup()
+        .apktool_patch('soter/patches/sskds'),
+    'system/lib64/lib_vnd_client.dk.samsung.so': blob_fixup()
+        .replace_needed('libcrypto.so', 'libcrypto_soter.so'),
+    'vendor/etc/init/vendor.samsung.hardware.security.drk-service.rc': blob_fixup()
+        .regex_replace('on boot\n', 'on boot\n    chown root system /sys/class/sec/ufs/un\n    mkdir /data/vendor/log 0755 root root\n'),
+    'vendor/lib64/libdk_vnd_service_core.so': blob_fixup()
+        .replace_needed('libcrypto.so', 'libcrypto-v33.so'),
+    'system/lib64/lib_nativeJni.dk.samsung.so': blob_fixup()
+        .replace_needed('libcrypto.so', 'libcrypto_soter.so'),
     'vendor/lib64/libskeymint_cli.so': blob_fixup()
         .replace_needed('libcrypto.so', 'libcrypto-v33.so'),
     'vendor/lib64/libsec-ril-impl.so': blob_fixup()

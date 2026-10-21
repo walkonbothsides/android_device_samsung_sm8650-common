@@ -1,0 +1,90 @@
+--- a/smali/com/tencent/soter/soterserver/SecSoterStub.smali
++++ b/smali/com/tencent/soter/soterserver/SecSoterStub.smali
+@@ -747,25 +747,10 @@
+ .end method
+ 
+ .method private static isUnderScreenSensor()Z
+-    .locals 2
+-
+-    .line 329
+-    invoke-static {}, Landroid/hardware/fingerprint/FingerprintManager;->semGetSensorPosition()I
+-
+-    move-result v0
+-
+-    const/4 v1, 0x2
+-
+-    if-ne v0, v1, :cond_0
+-
++    .locals 1
++
++    # SM-S9280 has an ultrasonic under-display fingerprint sensor.
+     const/4 v0, 0x1
+-
+-    goto :goto_0
+-
+-    :cond_0
+-    const/4 v0, 0x0
+-
+-    :goto_0
+     return v0
+ .end method
+ 
+--- a/smali/com/tencent/soter/soterserver/SecSoterStub$3.smali
++++ b/smali/com/tencent/soter/soterserver/SecSoterStub$3.smali
+@@ -1066,7 +1066,7 @@
+     if-eqz v1, :cond_3
+ 
+     .line 772
+-    invoke-virtual {v1}, Landroid/hardware/fingerprint/FingerprintManager;->semGetFingerIconRectInDisplay()Landroid/graphics/Rect;
++    invoke-static {v1}, Lcom/tencent/soter/soterserver/FingerprintCompat;->getRect(Landroid/hardware/fingerprint/FingerprintManager;)Landroid/graphics/Rect;
+ 
+     move-result-object v1
+ 
+--- a/smali/com/tencent/soter/soterserver/FingerprintCompat.smali
++++ b/smali/com/tencent/soter/soterserver/FingerprintCompat.smali
+@@ -0,0 +1,35 @@
++.class public final Lcom/tencent/soter/soterserver/FingerprintCompat;
++.super Ljava/lang/Object;
++
++.method public static getRect(Landroid/hardware/fingerprint/FingerprintManager;)Landroid/graphics/Rect;
++    .locals 4
++    invoke-static {}, Landroid/os/Binder;->clearCallingIdentity()J
++    move-result-wide v0
++    :try_start
++    invoke-virtual {p0}, Landroid/hardware/fingerprint/FingerprintManager;->getSensorPropertiesInternal()Ljava/util/List;
++    move-result-object v2
++    invoke-interface {v2}, Ljava/util/List;->isEmpty()Z
++    move-result v3
++    if-nez v3, :empty
++    const/4 v3, 0x0
++    invoke-interface {v2, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
++    move-result-object v2
++    check-cast v2, Landroid/hardware/fingerprint/FingerprintSensorPropertiesInternal;
++    invoke-virtual {v2}, Landroid/hardware/fingerprint/FingerprintSensorPropertiesInternal;->getLocation()Landroid/hardware/biometrics/SensorLocationInternal;
++    move-result-object v2
++    invoke-virtual {v2}, Landroid/hardware/biometrics/SensorLocationInternal;->getRect()Landroid/graphics/Rect;
++    move-result-object v2
++    goto :done
++    :empty
++    new-instance v2, Landroid/graphics/Rect;
++    invoke-direct {v2}, Landroid/graphics/Rect;-><init>()V
++    :done
++    :try_end
++    .catchall {:try_start .. :try_end} :failure
++    invoke-static {v0, v1}, Landroid/os/Binder;->restoreCallingIdentity(J)V
++    return-object v2
++    :failure
++    move-exception v2
++    invoke-static {v0, v1}, Landroid/os/Binder;->restoreCallingIdentity(J)V
++    throw v2
++.end method
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -2,6 +2,7 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" android:sharedUserId="android.uid.system" package="com.tencent.soter.soterserver" platformBuildVersionCode="33" platformBuildVersionName="13">
+     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
++    <uses-permission android:name="android.permission.MANAGE_FINGERPRINT"/>
+     <uses-permission android:name="com.samsung.android.sskds.permission.SSKDS_ATTK_SETUP"/>
+     <uses-permission android:name="com.sec.spp.permission.TOKEN_a2424f42711ca5cc1061a24e47e67a2010b031b3b0932743df9d777c6533fb635f57b6ccd7a86e632ec0c16427a9834d86cf9f0a8c5e3b243d4ceb58b5417b451c09d702babfc591d605f5005e4dd6f9c0e2693d606a19b4036cf596ec33b0143b529758eaffc152028c489178e45678d956cbd191310ded4fcc8c5303e9121a"/>
+     <uses-permission android:name="com.sec.android.diagmonagent.permission.DIAGMON"/>

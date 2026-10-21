@@ -1,0 +1,32 @@
+--- a/smali/com/samsung/android/sskds/security/PkgCertWhitelists.smali
++++ b/smali/com/samsung/android/sskds/security/PkgCertWhitelists.smali
+@@ -131,7 +131,9 @@
+ .end method
+ 
+ .method public static init(Landroid/content/Context;Ljava/lang/String;)Z
+-    .locals 2
++    .locals 3
++
++    move-object v2, p0
+ 
+     .line 21
+     sget-object v0, Lcom/samsung/android/sskds/security/PkgCertWhitelists;->TAG:Ljava/lang/String;
+@@ -157,6 +159,18 @@
+     move-result-object p0
+ 
+     sput-object p0, Lcom/samsung/android/sskds/security/PkgCertWhitelists;->mWhitelists:Ljava/util/Map;
++    # Retain the stock package whitelist, trusting the ROM platform signer.
++    const-string v0, "com.tencent.soter.soterserver"
++    invoke-interface {p0, v0}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
++    move-result v1
++    if-eqz v1, :platform_done
++    const-string v1, "android"
++    invoke-static {v2, v1}, Lcom/samsung/android/sskds/security/PkgCert;->hash(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
++    move-result-object v1
++    if-eqz v1, :platform_done
++    invoke-interface {p0, v0, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
++    :platform_done
++
+     :try_end_0
+     .catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0
+ 

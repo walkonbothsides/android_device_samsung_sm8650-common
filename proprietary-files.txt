@@ -12,6 +12,8 @@ vendor/lib64/libadsp_default_listener.so
 vendor/lib64/libadsprpc.so
 vendor/lib64/libloadalgo_stub.so
 
+# Stock audio HAL (replaces OSS stack, matches ADSP firmware)
+
 # ADSP modules
 vendor/lib/rfsa/adsp/libdsp_streamer_binning.so
 vendor/lib/rfsa/adsp/libhme_dsp_skel.so
@@ -1287,3 +1289,28 @@ vendor/etc/wifi/wpa_supplicant_overlay.conf
 # (commits referencing S9280ZCS6DZF2) for the exact blobs that differ.
 # This block lives at the end of the file on purpose so that Exynoobs
 # pull-bot sync merges do not produce header-comment conflicts.
+
+# Soter - SM-S9280 CHC S9280ZCS6DZF2
+system/etc/security/sskds.crt
+system/priv-app/SecSoterService/SecSoterService.apk
+system/priv-app/SoterSskdsSerivce/SoterSskdsSerivce.apk
+system/lib64/lib_nativeJni.dk.samsung.so
+system/lib64/libcrypto.so:system/lib64/libcrypto_soter.so;FIX_SONAME
+system/lib64/libdk_native_keymint.so;MODULE_SUFFIX=_soter_system
+system/lib64/vendor.samsung.hardware.keymint-V3-ndk.so;MODULE_SUFFIX=_soter_system
+vendor/bin/hw/vendor.samsung.hardware.soter-service
+vendor/etc/init/soter-default.rc
+vendor/etc/vintf/manifest/soter_device-manifest.xml
+vendor/lib64/libAidlSoterServiceImpl.so
+vendor/lib64/libTigerCaV4.so
+vendor/lib64/libTigerLogger.so
+vendor/lib64/vendor.samsung.hardware.soter-V2-ndk.so
+
+# Soter DRK provisioning - SM-S9280 CHC S9280ZCS6DZF2
+system/lib64/lib_vnd_client.dk.samsung.so
+system/lib64/vendor.samsung.hardware.security.drk-V1-ndk.so;MODULE_SUFFIX=_soter_system
+system/lib64/vendor.samsung.hardware.security.drk@2.0.so;MODULE_SUFFIX=_soter_system
+vendor/bin/hw/vendor.samsung.hardware.security.drk-service
+vendor/etc/init/vendor.samsung.hardware.security.drk-service.rc
+vendor/etc/vintf/manifest/drk_manifest.xml
+vendor/lib64/libdk_vnd_service_core.so
