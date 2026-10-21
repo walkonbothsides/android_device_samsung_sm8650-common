@@ -1,0 +1,30 @@
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!--
+     Samsung's vendor.samsung.hardware.security.widevine.keyprov HAL ships as
+     AIDL (ISehWidevineKeyProv/default) in the prebuilt vendor image, while the
+     main samsung_framework_compatibility_matrix.xml only declares the legacy
+     HIDL form (ISehWidevineKeyProvisioning@1.0). VINTF matches on the 4-tuple
+     format+name+version+interface, so the HIDL entry does NOT satisfy the AIDL
+     device-manifest entry, and check_vintf fails with:
+       vendor.samsung.hardware.security.widevine.keyprov.ISehWidevineKeyProv/default (@1)
+       is in the device manifest but not specified in framework compatibility matrix
+
+     This file MUST stay separate from samsung_framework_compatibility_matrix.xml:
+     assemble_vintf merges entries sharing format+name *within one file*, and the
+     HIDL entry there would swallow this AIDL entry, leaving a bare <name/> shell.
+     Note also that the <interface><name>/<instance> triple is the only accepted
+     input form here — <fqname> is assemble_vintf's *output* syntax and is
+     silently dropped when used as input.
+-->
+<compatibility-matrix version="2.0" type="framework">
+    <hal format="aidl" optional="true">
+        <name>vendor.samsung.hardware.security.widevine.keyprov</name>
+        <interface>
+            <name>ISehWidevineKeyProv</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</compatibility-matrix>
