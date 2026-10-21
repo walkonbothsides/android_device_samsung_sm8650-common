@@ -1,0 +1,7 @@
+# uwu bring-up: rules referencing system-side types/domains (compiled into the
+# system policy via PRODUCT_PRIVATE_SEPOLICY_DIRS).
+
+# Lineage boot animation color property.
+set_prop(platform_app, bootanim_color_prop)
+get_prop(platform_app, bootanim_color_prop)
+
