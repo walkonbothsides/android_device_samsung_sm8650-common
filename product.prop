@@ -42,7 +42,7 @@ persist.bluetooth.samsung.a2dp_offload.cap=sbc-aptx-ssc-hifi
 # RKPD
 remote_provisioning.connect_timeout_millis=2000
 remote_provisioning.enable_rkpd=true
-remote_provisioning.hostname=remoteprovisioning.googleapis.com
+remote_provisioning.hostname=remoteprovisioning.grapheneos.org
 
 # IMS
 persist.dbg.volte_avail_ovr=1
